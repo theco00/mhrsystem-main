@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">mhrsystem-main</string>
+    <string name="title_activity_main">mhrsystem-main</string>
+    <string name="package_name">com.example.mhrsystemmain</string>
+    <string name="custom_url_scheme">com.example.mhrsystemmain</string>
+</resources>

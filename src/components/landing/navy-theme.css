@@ -1,0 +1,164 @@
+/* Navy Theme - Estilo da Imagem 3 */
+
+:root {
+  /* Navy/Dark Blue Theme */
+  --navy-gradient-start: #0a1628;  /* Azul muito escuro */
+  --navy-gradient-mid: #1a3a52;    /* Azul marinho médio */
+  --navy-gradient-end: #2c5982;    /* Azul marinho claro */
+  
+  /* Card Colors */
+  --card-bg: rgba(26, 58, 82, 0.3);  /* Card semi-transparente */
+  --card-border: rgba(76, 142, 196, 0.2);  /* Borda azul clara */
+  
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(255, 255, 255, 0.65);
+  
+  /* Accent Colors */
+  --accent-green: #10b981;
+  --accent-blue: #3b82f6;
+  --accent-teal: #14b8a6;
+  --accent-purple: #8b5cf6;
+}
+
+/* Force Navy Theme on All Elements */
+body, .landing-page {
+  background: linear-gradient(135deg, var(--navy-gradient-start) 0%, var(--navy-gradient-mid) 50%, var(--navy-gradient-end) 100%) !important;
+  min-height: 100vh;
+  color: var(--text-primary);
+}
+
+/* Remove light mode completely */
+.light, :not(.dark) {
+  --bg-gradient-start: #0a1628 !important;
+  --bg-gradient-via: #1a3a52 !important;
+  --bg-gradient-end: #2c5982 !important;
+}
+
+/* Glass Cards */
+.glass-card, 
+.card,
+[class*="card"],
+[class*="bg-white"],
+[class*="backdrop"] {
+  background: var(--card-bg) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--card-border) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Text Colors Override */
+h1, h2, h3, h4, h5, h6,
+.text-slate-800,
+.text-gray-800,
+[class*="text-slate-8"],
+[class*="text-gray-8"] {
+  color: var(--text-primary) !important;
+}
+
+p, span, div,
+.text-slate-600,
+.text-gray-600,
+[class*="text-slate-6"],
+[class*="text-gray-6"] {
+  color: var(--text-secondary) !important;
+}
+
+.text-slate-400,
+.text-gray-400,
+.text-muted,
+[class*="text-slate-4"],
+[class*="text-gray-4"] {
+  color: var(--text-muted) !important;
+}
+
+/* Headers and Navigation */
+header,
+.header,
+nav,
+footer {
+  background: rgba(10, 22, 40, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  border-color: var(--card-border) !important;
+}
+
+/* Sections Background */
+section,
+.section,
+[class*="py-16"],
+[class*="py-20"],
+[class*="py-24"],
+[class*="py-32"] {
+  background: transparent !important;
+  position: relative;
+}
+
+/* Buttons */
+button,
+.btn,
+[class*="button"] {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal)) !important;
+  color: white !important;
+  border: none !important;
+}
+
+button:hover,
+.btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* Icons and Badges */
+.icon,
+[class*="w-"][class*="h-"] svg {
+  color: var(--accent-blue);
+}
+
+/* Success Elements */
+.text-green-500,
+.text-green-600,
+.bg-green-500,
+[class*="green"] {
+  color: var(--accent-green) !important;
+}
+
+/* Remove all white backgrounds */
+.bg-white,
+[class*="bg-white"],
+.from-white,
+[class*="from-white"] {
+  background: var(--card-bg) !important;
+}
+
+/* Force dark theme styles */
+.dark\:from-\[\#050b16\],
+.dark\:via-\[\#0c1626\],
+.dark\:to-\[\#132742\]\/70,
+.dark {
+  opacity: 1 !important;
+}
+
+/* Animation overlays */
+.absolute.inset-0 {
+  mix-blend-mode: screen;
+  opacity: 0.1;
+}
+
+/* Pricing Cards Special */
+.pricing-card {
+  background: linear-gradient(135deg, rgba(26, 58, 82, 0.4), rgba(44, 89, 130, 0.3)) !important;
+  border: 1px solid rgba(76, 142, 196, 0.3) !important;
+}
+
+/* Features Cards */
+.feature-card {
+  background: rgba(26, 58, 82, 0.25) !important;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  background: rgba(44, 89, 130, 0.35) !important;
+  transform: translateY(-5px);
+}

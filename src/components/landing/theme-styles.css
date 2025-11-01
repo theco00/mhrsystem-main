@@ -1,0 +1,105 @@
+/* Theme Styles - Light and Dark Mode Support */
+
+/* Dark Mode (Navy Theme - Default) */
+.dark-mode {
+  --bg-primary: #0a1628;
+  --bg-secondary: #1a3a52;
+  --bg-tertiary: #2c5982;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(255, 255, 255, 0.65);
+}
+
+.dark-mode .landing-page {
+  background: linear-gradient(135deg, #0a1628 0%, #1a3a52 50%, #2c5982 100%) !important;
+}
+
+.dark-mode header,
+.dark-mode footer {
+  background: rgba(10, 22, 40, 0.95) !important;
+  border-color: rgba(76, 142, 196, 0.2) !important;
+}
+
+/* Light Mode */
+.light-mode {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #e2e8f0;
+  --bg-tertiary: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+}
+
+.light-mode .landing-page {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%) !important;
+}
+
+.light-mode header,
+.light-mode footer {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(226, 232, 240, 0.6) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode h4,
+.light-mode h5,
+.light-mode h6 {
+  color: var(--text-primary) !important;
+}
+
+.light-mode p,
+.light-mode span:not([style*="gradient"]) {
+  color: var(--text-secondary) !important;
+}
+
+/* Cards in Light Mode */
+.light-mode [class*="card"],
+.light-mode [class*="glass"] {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(226, 232, 240, 0.8) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Buttons in Light Mode */
+.light-mode button:not([style*="gradient"]) {
+  background: rgba(59, 130, 246, 0.1) !important;
+  color: #3b82f6 !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+/* FAQ Section in Light Mode */
+.light-mode #faq [class*="card"] {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(203, 213, 225, 0.6) !important;
+}
+
+/* Pricing Section in Light Mode */
+.light-mode #pricing [class*="card"] {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(203, 213, 225, 0.6) !important;
+}
+
+/* Features Section in Light Mode */
+.light-mode #features [class*="card"] {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(203, 213, 225, 0.5) !important;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Override for animations */
+[class*="motion-"],
+[class*="animate-"] {
+  transition: none !important;
+}
+
+/* Preserve gradients in both modes */
+[style*="gradient"] {
+  transition: none !important;
+}

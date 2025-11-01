@@ -1,0 +1,107 @@
+/* Landing Page Theme - Based on Login Page Colors */
+
+:root {
+  /* Light Mode Colors */
+  --bg-gradient-start: #f4f1ec;
+  --bg-gradient-via: #eef2f7;
+  --bg-gradient-end: rgba(219, 229, 244, 0.5);
+  --bg-overlay: rgba(68, 142, 208, 0.12);
+  
+  /* Accent Colors */
+  --primary: #448ed0;
+  --primary-hover: #4a90e2;
+  --primary-light: #5B9FE3;
+  
+  /* Text Colors */
+  --text-primary: #1e293b; /* slate-800 */
+  --text-secondary: #475569; /* slate-600 */
+  --text-muted: #64748b; /* slate-500 */
+  
+  /* Borders */
+  --border-color: rgba(226, 232, 240, 0.6); /* slate-200/60 */
+  
+  /* Card Backgrounds */
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-bg-secondary: rgba(255, 255, 255, 0.8);
+}
+
+.dark {
+  /* Dark Mode Colors */
+  --bg-gradient-start: #050b16;
+  --bg-gradient-via: #0c1626;
+  --bg-gradient-end: rgba(19, 39, 66, 0.7);
+  --bg-overlay: rgba(74, 144, 226, 0.15);
+  
+  /* Text Colors Dark */
+  --text-primary: #f1f5f9; /* slate-100 */
+  --text-secondary: #cbd5e1; /* slate-300 */
+  --text-muted: #94a3b8; /* slate-400 */
+  
+  /* Borders Dark */
+  --border-color: rgba(51, 65, 85, 0.6); /* slate-700/60 */
+  
+  /* Card Backgrounds Dark */
+  --card-bg: rgba(15, 23, 42, 0.95); /* slate-900/95 */
+  --card-bg-secondary: rgba(15, 23, 42, 0.8); /* slate-900/80 */
+}
+
+/* Apply theme to all sections */
+.landing-section {
+  background: linear-gradient(
+    to bottom right,
+    var(--bg-gradient-start),
+    var(--bg-gradient-via),
+    var(--bg-gradient-end)
+  );
+}
+
+.landing-overlay {
+  background: radial-gradient(
+    circle at top right,
+    var(--bg-overlay),
+    transparent 60%
+  );
+}
+
+/* Cards and Glass Effects */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+}
+
+.glass-card-secondary {
+  background: var(--card-bg-secondary);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+}
+
+/* Buttons with Theme Colors */
+.btn-primary {
+  background: linear-gradient(to right, var(--primary), var(--primary-hover));
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to right, var(--primary-hover), var(--primary-light));
+}
+
+/* Text Colors */
+.text-theme-primary {
+  color: var(--text-primary);
+}
+
+.text-theme-secondary {
+  color: var(--text-secondary);
+}
+
+.text-theme-muted {
+  color: var(--text-muted);
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

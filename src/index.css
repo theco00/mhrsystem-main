@@ -1,0 +1,1109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* TitanJuros - Modern Design System */
+
+@layer base {
+  :root {
+    /* TitanJuros Modern Blue & White Theme - Light Mode */
+    --background: 0 0% 100%;
+    --foreground: 220 13% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 15%;
+
+    /* Modern Blue Primary */
+    --primary: 214 85% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 214 85% 44%;
+    --primary-light: 214 85% 95%;
+
+    /* Light Blue Secondary */
+    --secondary: 210 100% 94%;
+    --secondary-foreground: 214 85% 50%;
+    --secondary-hover: 210 100% 90%;
+
+    /* Neutral Muted Tones */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Sky Blue Accent */
+    --accent: 199 100% 45%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 199 100% 94%;
+
+    /* Status Colors - Modern */
+    --success: 142 76% 40%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 76% 96%;
+
+    --warning: 38 95% 48%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 95% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-light: 0 84% 95%;
+
+    /* Clean Borders & Inputs */
+    --border: 214 32% 91%;
+    --input: 0 0% 100%;
+    --ring: 214 85% 50%;
+
+    --radius: 0.75rem;
+
+    /* Modern Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(214 85% 50%), hsl(199 100% 45%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 100% 98%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 40%), hsl(142 76% 50%));
+    --gradient-dashboard: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 100% 98%) 100%);
+    --gradient-metallic: linear-gradient(135deg, hsl(214 85% 45%), hsl(199 100% 40%));
+
+    /* Soft Shadows */
+    --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-strong: 0 12px 28px rgba(0, 0, 0, 0.12);
+    --shadow-glow: 0 0 0 3px hsl(214 85% 50% / 0.12);
+
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Inter', system-ui, sans-serif;
+
+    /* Sidebar - Light */
+    --sidebar-background: 210 100% 97%;
+    --sidebar-foreground: 220 13% 15%;
+    --sidebar-primary: 214 85% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 100% 94%;
+    --sidebar-accent-foreground: 214 85% 45%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 214 85% 50%;
+  }
+
+  .dark {
+    /* Dark Mode - Modern Blue Theme */
+    --background: 220 40% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 35% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 35% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 199 100% 55%;
+    --primary-foreground: 220 40% 8%;
+    --primary-hover: 199 100% 48%;
+    --primary-light: 214 35% 15%;
+
+    --secondary: 214 35% 15%;
+    --secondary-foreground: 199 100% 65%;
+    --secondary-hover: 214 35% 20%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 25% 65%;
+
+    --accent: 199 100% 62%;
+    --accent-foreground: 220 40% 8%;
+    --accent-light: 214 35% 20%;
+
+    --success: 142 70% 50%;
+    --success-foreground: 220 40% 8%;
+    --success-light: 142 70% 15%;
+
+    --warning: 38 92% 55%;
+    --warning-foreground: 220 40% 8%;
+    --warning-light: 38 92% 15%;
+
+    --destructive: 0 74% 62%;
+    --destructive-foreground: 220 40% 8%;
+    --destructive-light: 0 84% 15%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 14%;
+    --ring: 199 100% 55%;
+
+    --sidebar-background: 220 35% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 199 100% 55%;
+    --sidebar-primary-foreground: 220 40% 8%;
+    --sidebar-accent: 214 35% 15%;
+    --sidebar-accent-foreground: 199 100% 65%;
+    --sidebar-border: 217 33% 18%;
+    --sidebar-ring: 199 100% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  /* Root - Mobile-first optimizations */
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    touch-action: manipulation;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-family);
+    font-weight: 400;
+    letter-spacing: -0.011em;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* iOS Safe Area - Suporte para notch */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    
+    /* Previne zoom em inputs no iOS */
+    -webkit-text-size-adjust: 100%;
+    
+    /* Melhora performance de scroll em mobile */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
+
+  /* Tipografia moderna e responsiva */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', var(--font-family);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: hsl(var(--foreground));
+  }
+
+  h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  h2 {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  h4 {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+  
+  p {
+    line-height: 1.6;
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Inputs mobile-friendly - previne zoom no iOS */
+  input, textarea, select {
+    font-size: 16px;
+  }
+
+  @media (min-width: 768px) {
+    input, textarea, select {
+      font-size: 14px;
+    }
+  }
+
+  /* Apple-Style Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/40;
+  }
+}
+
+@layer components {
+  /* Professional Card Variants */
+  .card-gradient {
+    background: var(--gradient-secondary);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .glass-card {
+    background: hsl(var(--card) / 0.95);
+    backdrop-filter: blur(12px) saturate(1.5);
+    -webkit-backdrop-filter: blur(12px) saturate(1.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid hsl(var(--border) / 0.3);
+    border-radius: var(--radius);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .glass-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .glow-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glow-card::before {
+    content: "";
+    position: absolute;
+    inset: -120%;
+    background: conic-gradient(from 0deg, hsl(var(--primary) / 0.08), transparent 40%, transparent 60%, hsl(var(--accent) / 0.12), transparent 80%);
+    animation: rotateGlow 18s linear infinite;
+    z-index: 0;
+  }
+
+  .glow-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .ambient-background {
+    background-image:
+      radial-gradient(circle at 0% 0%, hsl(var(--primary) / 0.08), transparent 45%),
+      radial-gradient(circle at 70% 0%, hsl(var(--accent) / 0.08), transparent 55%),
+      radial-gradient(circle at 100% 100%, hsl(var(--primary) / 0.05), transparent 40%);
+  }
+
+  .ambient-grid {
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--border) / 0.3) 1px, transparent 0);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    opacity: 0.45;
+  }
+
+  .surface-muted {
+    background: linear-gradient(135deg, hsl(var(--card) / 0.92), hsl(var(--muted) / 0.75));
+    border: 1px solid hsl(var(--border) / 0.6);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .card-primary {
+    background: var(--gradient-primary);
+    @apply text-primary-foreground;
+    box-shadow: var(--shadow-medium);
+  }
+
+  .card-success {
+    background: var(--gradient-success);
+    @apply text-success-foreground;
+  }
+
+  /* Apple-Style Button Effects */
+  .btn-glow:focus {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Rounded Images - Apple Style */
+  img {
+    border-radius: var(--radius);
+  }
+
+  /* Dashboard Grid - Mobile Responsive */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  /* Tabelas responsivas com scroll horizontal */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-responsive table {
+    min-width: 600px;
+  }
+
+  @media (max-width: 768px) {
+    .table-responsive table {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Cards empilháveis em mobile */
+  .mobile-cards {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-cards {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  /* Área de toque mínima para dispositivos móveis */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Imagens responsivas */
+  .responsive-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Gráficos responsivos */
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+  }
+
+  @media (max-width: 640px) {
+    .chart-container {
+      height: 200px;
+    }
+  }
+
+  /* Sidebar mobile overlay */
+  .mobile-sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+  }
+
+  /* Financial Status Indicators */
+  .status-paid {
+    @apply bg-success/10 text-success border-success/20;
+  }
+
+  .status-pending {
+    @apply bg-warning/10 text-warning border-warning/20;
+  }
+
+  .status-overdue {
+    @apply bg-destructive/10 text-destructive border-destructive/20;
+  }
+
+  /* Modern Professional Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* New Blue Theme Animations */
+  .animate-wave {
+    animation: wave 2s ease-in-out infinite;
+  }
+  
+  .animate-float-smooth {
+    animation: floatSmooth 4s ease-in-out infinite;
+  }
+  
+  .animate-glow-pulse {
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+  
+  .animate-shimmer-blue {
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      hsl(var(--primary) / 0.3) 50%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmerBlue 2s linear infinite;
+  }
+  
+  .animate-rotate-slow {
+    animation: rotateSlow 20s linear infinite;
+  }
+  
+  .animate-bounce-soft {
+    animation: bounceSoft 2s ease-in-out infinite;
+  }
+
+  /* Modern Blue Theme Hover Effects */
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 10px 25px -5px rgba(59, 130, 246, 0.2),
+      0 8px 10px -6px rgba(59, 130, 246, 0.1);
+  }
+
+  .hover-scale {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.02);
+  }
+  
+  .hover-glow {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 
+      0 0 15px rgba(59, 130, 246, 0.4),
+      0 0 30px rgba(59, 130, 246, 0.2);
+  }
+  
+  .hover-border-glow {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-border-glow::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-border-glow:hover::after {
+    opacity: 1;
+  }
+
+  /* Apple-Style Button Animations */
+  .btn-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-hover:hover::before {
+    left: 100%;
+  }
+
+  .btn-hover:active {
+    transform: scale(0.98);
+  }
+
+  /* Apple-Style Card Animations */
+  .card-interactive {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -8px hsl(0 0% 0% / 0.15);
+  }
+
+  /* Form animations */
+  .form-field {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .form-field:focus-within {
+    transform: scale(1.01);
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+  }
+
+  /* Stagger animations for lists */
+  .stagger-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: staggerFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .stagger-item:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-item:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-item:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-item:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-item:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-item:nth-child(6) { animation-delay: 0.6s; }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  /* Loading animation */
+  .animate-pulse-soft {
+    animation: pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Loading states responsivos */
+  .loading-skeleton {
+    background: linear-gradient(90deg, 
+      hsl(var(--muted)) 25%, 
+      hsl(var(--muted-foreground) / 0.1) 50%, 
+      hsl(var(--muted)) 75%
+    );
+    background-size: 200% 100%;
+    animation: loading-shimmer 2s infinite;
+  }
+
+  @keyframes loading-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* Keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes staggerFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseSoft {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes rotateGlow {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-6px); }
+    75% { transform: translateY(3px); }
+  }
+  
+  @keyframes floatSmooth {
+    0%, 100% { 
+      transform: translateY(0) translateX(0); 
+    }
+    33% { 
+      transform: translateY(-10px) translateX(5px); 
+    }
+    66% { 
+      transform: translateY(5px) translateX(-5px); 
+    }
+  }
+  
+  @keyframes glowPulse {
+    0%, 100% {
+      box-shadow: 
+        0 0 20px hsl(var(--primary) / 0.3),
+        0 0 40px hsl(var(--primary) / 0.2),
+        0 0 60px hsl(var(--primary) / 0.1);
+    }
+    50% {
+      box-shadow: 
+        0 0 30px hsl(var(--primary) / 0.4),
+        0 0 50px hsl(var(--primary) / 0.3),
+        0 0 70px hsl(var(--primary) / 0.2);
+    }
+  }
+  
+  @keyframes shimmerBlue {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes bounceSoft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Landing Page Premium Styles */
+  .glass-card-premium {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(31, 38, 135, 0.37),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .card-3d:hover {
+    transform: perspective(1000px) rotateY(10deg) rotateX(5deg) scale(1.05);
+  }
+
+  .mesh-gradient {
+    background-image: 
+      radial-gradient(at 40% 20%, hsla(212, 61%, 30%, 0.8) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsla(214, 47%, 57%, 0.6) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsla(212, 66%, 13%, 0.7) 0px, transparent 50%);
+  }
+
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-move 20s linear infinite;
+  }
+
+  @keyframes grid-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== MOBILE RESPONSIVE UTILITIES ===== */
+  
+  /* Espaçamentos adaptativos */
+  .container-mobile {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .spacing-mobile {
+    @apply space-y-4 sm:space-y-6 lg:space-y-8;
+  }
+
+  /* Botões mobile-friendly com área de toque adequada */
+  .btn-mobile {
+    @apply min-h-[44px] min-w-[44px] px-4 py-2.5 text-base;
+  }
+
+  @media (min-width: 768px) {
+    .btn-mobile {
+      @apply min-h-[40px] min-w-[40px] px-3 py-2 text-sm;
+    }
+  }
+
+  /* Cards responsivos */
+  .card-mobile {
+    @apply rounded-xl p-4 sm:rounded-2xl sm:p-6;
+  }
+
+  /* Grid responsivo mobile-first */
+  .grid-mobile-1 {
+    @apply grid grid-cols-1 gap-4 sm:gap-6;
+  }
+
+  .grid-mobile-2 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6;
+  }
+
+  .grid-mobile-3 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6;
+  }
+
+  .grid-mobile-4 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6;
+  }
+
+  /* Texto responsivo */
+  .text-mobile-xs {
+    @apply text-xs sm:text-sm;
+  }
+
+  .text-mobile-sm {
+    @apply text-sm sm:text-base;
+  }
+
+  .text-mobile-base {
+    @apply text-base sm:text-lg;
+  }
+
+  .text-mobile-lg {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+
+  /* Diálogos e modais mobile-friendly */
+  .dialog-mobile {
+    @apply max-h-[90vh] w-[95vw] max-w-lg rounded-xl sm:w-full sm:rounded-2xl;
+  }
+
+  /* Tabelas responsivas aprimoradas */
+  .table-mobile {
+    @apply w-full overflow-x-auto;
+  }
+
+  .table-mobile table {
+    @apply min-w-[600px] text-sm;
+  }
+
+  @media (max-width: 640px) {
+    .table-mobile table {
+      @apply text-xs;
+    }
+  }
+
+  /* Stack mobile - empilha elementos verticalmente em mobile */
+  .stack-mobile {
+    @apply flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4;
+  }
+
+  /* Hide/Show baseado em breakpoint */
+  .hide-mobile {
+    @apply hidden sm:block;
+  }
+
+  .show-mobile {
+    @apply block sm:hidden;
+  }
+
+  /* Navegação mobile bottom */
+  .nav-mobile-bottom {
+    @apply fixed bottom-0 left-0 right-0 z-50 border-t bg-card/95 backdrop-blur-lg;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Scroll horizontal mobile */
+  .scroll-mobile-x {
+    @apply -mx-4 flex gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scroll-mobile-x::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Imagens otimizadas para mobile */
+  .img-mobile {
+    @apply h-auto w-full object-cover;
+  }
+
+  /* Formulários mobile-friendly */
+  .form-mobile {
+    @apply space-y-4 sm:space-y-6;
+  }
+
+  .form-mobile input,
+  .form-mobile textarea,
+  .form-mobile select {
+    @apply w-full rounded-lg border px-4 py-3 text-base sm:rounded-xl sm:py-2.5;
+  }
+
+  /* Performance - reduz animações em mobile se necessário */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Touch feedback */
+  .touch-feedback {
+    @apply active:scale-95 active:opacity-80;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+  }
+
+  /* Safe area para iOS */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Overlay mobile */
+  .overlay-mobile {
+    @apply fixed inset-0 z-40 bg-black/60 backdrop-blur-sm;
+  }
+
+  /* Drawer mobile */
+  .drawer-mobile {
+    @apply fixed inset-x-0 bottom-0 z-50 max-h-[90vh] rounded-t-2xl bg-card shadow-strong;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Sticky header mobile */
+  .sticky-mobile {
+    @apply sticky top-0 z-30 bg-background/95 backdrop-blur-lg;
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* ===== CORREÇÕES MOBILE ESPECÍFICAS ===== */
+  
+  /* Garantir que nenhum elemento ultrapasse os limites da tela */
+  @media (max-width: 640px) {
+    * {
+      max-width: 100vw;
+    }
+    
+    /* Containers principais */
+    body, #root, main {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    
+    /* Cards e diálogos */
+    .card, [role="dialog"], [data-radix-dialog-content] {
+      max-width: calc(100vw - 2rem) !important;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Tabelas responsivas */
+    table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+    
+    /* Inputs e formulários */
+    input, textarea, select, button {
+      max-width: 100%;
+      font-size: 16px !important; /* Previne zoom no iOS */
+    }
+    
+    /* Imagens e mídia */
+    img, video, iframe {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Gráficos */
+    .recharts-wrapper {
+      max-width: 100% !important;
+    }
+    
+    /* Modais e overlays */
+    [data-radix-dialog-overlay] {
+      position: fixed;
+      inset: 0;
+    }
+    
+    /* Tooltips e popovers */
+    [data-radix-tooltip-content],
+    [data-radix-popover-content] {
+      max-width: calc(100vw - 2rem);
+    }
+    
+    /* Bordas arredondadas em mobile */
+    .rounded-xl {
+      @apply rounded-lg;
+    }
+    
+    .rounded-2xl {
+      @apply rounded-xl;
+    }
+    
+    /* Padding lateral consistente */
+    .container, .container-mobile, main > div {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    /* Scroll suave em mobile */
+    * {
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Prevenir zoom em double tap */
+    * {
+      touch-action: manipulation;
+    }
+  }
+  
+  /* Correções específicas para iOS */
+  @supports (-webkit-touch-callout: none) {
+    /* Safe area para iPhone com notch */
+    body {
+      padding-top: max(env(safe-area-inset-top), 0px);
+      padding-bottom: max(env(safe-area-inset-bottom), 0px);
+      padding-left: max(env(safe-area-inset-left), 0px);
+      padding-right: max(env(safe-area-inset-right), 0px);
+    }
+    
+    /* Altura dinâmica para iOS */
+    .h-screen {
+      height: 100dvh;
+    }
+    
+    /* Input fix para iOS */
+    input, textarea, select {
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+  }
+  
+  /* Correções para Android */
+  @media (max-width: 640px) and (orientation: portrait) {
+    /* Ajuste de viewport para Android */
+    html {
+      height: -webkit-fill-available;
+    }
+    
+    body {
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+    }
+  }
+}

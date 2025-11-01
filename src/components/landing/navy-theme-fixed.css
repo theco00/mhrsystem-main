@@ -1,0 +1,180 @@
+/* Navy Theme Fixed - Correções de bugs e melhorias visuais */
+
+:root {
+  /* Navy/Dark Blue Theme */
+  --navy-gradient-start: #0a1628;
+  --navy-gradient-mid: #1a3a52;
+  --navy-gradient-end: #2c5982;
+  
+  /* Card Colors */
+  --card-bg: rgba(26, 58, 82, 0.4);
+  --card-border: rgba(76, 142, 196, 0.3);
+  --card-hover: rgba(44, 89, 130, 0.5);
+  
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.9);
+  --text-muted: rgba(255, 255, 255, 0.7);
+  
+  /* Accent Colors - Mais vívidos */
+  --accent-green: #10f981;
+  --accent-blue: #4a90ff;
+  --accent-teal: #14ffc6;
+  --accent-purple: #a855f7;
+  --accent-yellow: #fbbf24;
+}
+
+/* Desabilitar seleção de texto feia */
+::selection {
+  background: rgba(74, 144, 255, 0.3);
+  color: white;
+}
+
+/* Melhorar foco e outline */
+*:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(74, 144, 255, 0.5);
+  border-radius: 8px;
+}
+
+/* Cards sem bugs de seleção */
+.card,
+[class*="card"] {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Ícones mais vívidos */
+svg {
+  filter: drop-shadow(0 0 2px currentColor);
+}
+
+.text-blue-400 svg,
+.text-blue-500 svg {
+  color: var(--accent-blue) !important;
+  filter: drop-shadow(0 0 4px rgba(74, 144, 255, 0.5));
+}
+
+.text-green-400 svg,
+.text-green-500 svg {
+  color: var(--accent-green) !important;
+  filter: drop-shadow(0 0 4px rgba(16, 249, 129, 0.5));
+}
+
+.text-yellow-400 svg {
+  color: var(--accent-yellow) !important;
+  filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.5));
+}
+
+/* FAQ Section - Corrigir visual de seleção */
+#faq button:focus,
+#faq button:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#faq .group:hover {
+  transform: translateY(-2px);
+}
+
+/* Pricing Cards - Melhorar hover */
+#pricing [class*="card"]:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 20px 40px rgba(74, 144, 255, 0.2) !important;
+}
+
+/* Features Cards - Visual melhorado */
+#features [class*="card"] {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#features [class*="card"]:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: rgba(44, 89, 130, 0.4) !important;
+}
+
+/* Animações suaves */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(74, 144, 255, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(74, 144, 255, 0.8);
+  }
+}
+
+/* Ícones animados */
+.icon-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.icon-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Botões com melhor contraste */
+button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Remover bugs de texto selecionado */
+.text-white,
+.text-gray-300,
+.text-gray-400 {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Melhorar transições globais */
+* {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Scrollbar customizada */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--navy-gradient-start);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-blue), var(--accent-teal));
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-teal), var(--accent-blue));
+}

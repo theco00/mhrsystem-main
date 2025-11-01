@@ -1,0 +1,36 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' role='img' aria-labelledby='title desc'>
+  <title id='title'>TitanJuros Logo</title>
+  <desc id='desc'>Stylised T monogram in blue gradients for TitanJuros</desc>
+  <defs>
+    <linearGradient id='topMain' x1='0%' y1='0%' x2='100%' y2='0%'>
+      <stop offset='0%' stop-color='#0D2F4B'/>
+      <stop offset='45%' stop-color='#154C78'/>
+      <stop offset='100%' stop-color='#74A9D8'/>
+    </linearGradient>
+    <linearGradient id='topHighlight' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#6CA0D2' stop-opacity='0.85'/>
+      <stop offset='100%' stop-color='#1D4C78' stop-opacity='0'/>
+    </linearGradient>
+    <linearGradient id='stemMain' x1='50%' y1='0%' x2='50%' y2='100%'>
+      <stop offset='0%' stop-color='#0F4C81'/>
+      <stop offset='45%' stop-color='#0E3F6A'/>
+      <stop offset='100%' stop-color='#0A2741'/>
+    </linearGradient>
+    <linearGradient id='stemHighlight' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#76B5E2' stop-opacity='0.75'/>
+      <stop offset='40%' stop-color='#2A5E8D' stop-opacity='0.2'/>
+      <stop offset='100%' stop-color='#09243B' stop-opacity='0'/>
+    </linearGradient>
+    <linearGradient id='stemEdge' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#173A5C' stop-opacity='0.9'/>
+      <stop offset='100%' stop-color='#06182A' stop-opacity='0.6'/>
+    </linearGradient>
+  </defs>
+  <g fill='none'>
+    <path d='M28 52c0-8.836 7.164-16 16-16h168c8.836 0 16 7.164 16 16v20c0 8.836-7.164 16-16 16H156v128c0 8.836-7.164 16-16 16h-24c-8.836 0-16-7.164-16-16V88H44c-8.836 0-16-7.164-16-16V52z' fill='url(#topMain)'/>
+    <path d='M28 52c0-8.836 7.164-16 16-16h168c8.836 0 16 7.164 16 16v16H28V52z' fill='url(#topHighlight)'/>
+    <path d='M116 88h24v128c0 8.836-7.164 16-16 16h-8c-8.836 0-16-7.164-16-16V88z' fill='url(#stemMain)'/>
+    <path d='M140 88v128c0 8.836-7.164 16-16 16h-8c-3.676 0-7.064-1.24-9.79-3.316L140 88z' fill='url(#stemEdge)'/>
+    <path d='M116 88h24l-45.21 140.684C91.064 226.76 87.676 228 84 228h-0.5c-6.904 0-12.5-5.596-12.5-12.5 0-1.308.207-2.582.588-3.79L116 88z' fill='url(#stemHighlight)'/>
+  </g>
+</svg>
