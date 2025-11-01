@@ -27,6 +27,61 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
   const navigate = useNavigate();
+  
+  // Proteção contra loops de redirecionamento
+  const MAX_REDIRECT_ATTEMPTS = 3;
+  const REDIRECT_RESET_TIME = 60000; // 1 minuto
+  
+  // Função para verificar se podemos redirecionar (proteção contra loops)
+  const canRedirect = (): boolean => {
+    try {
+      const redirectData = sessionStorage.getItem('redirect_attempts');
+      if (!redirectData) return true;
+      
+      const { count, timestamp } = JSON.parse(redirectData);
+      const now = Date.now();
+      
+      // Reset se passou mais de 1 minuto
+      if (now - timestamp > REDIRECT_RESET_TIME) {
+        sessionStorage.removeItem('redirect_attempts');
+        return true;
+      }
+      
+      // Bloquear se excedeu tentativas
+      if (count >= MAX_REDIRECT_ATTEMPTS) {
+        console.warn('🚫 Muitas tentativas de redirecionamento. Bloqueando para evitar loop.');
+        return false;
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Erro ao verificar redirecionamento:', error);
+      return true;
+    }
+  };
+  
+  // Função para registrar tentativa de redirecionamento
+  const registerRedirect = (): void => {
+    try {
+      const redirectData = sessionStorage.getItem('redirect_attempts');
+      const now = Date.now();
+      
+      if (!redirectData) {
+        sessionStorage.setItem('redirect_attempts', JSON.stringify({ count: 1, timestamp: now }));
+      } else {
+        const { count, timestamp } = JSON.parse(redirectData);
+        
+        // Reset se passou tempo
+        if (now - timestamp > REDIRECT_RESET_TIME) {
+          sessionStorage.setItem('redirect_attempts', JSON.stringify({ count: 1, timestamp: now }));
+        } else {
+          sessionStorage.setItem('redirect_attempts', JSON.stringify({ count: count + 1, timestamp }));
+        }
+      }
+    } catch (error) {
+      console.error('Erro ao registrar redirecionamento:', error);
+    }
+  };
 
   // Efeito para monitorar status de autenticação do Supabase
   useEffect(() => {
@@ -44,12 +99,61 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             case 'SIGNED_IN':
               console.log('✅ Usuário autenticado com sucesso:', session?.user?.email);
               
-              // Redirecionar para welcome após primeiro login
+              // Verificação inteligente de redirecionamento
               if (session?.user) {
                 const currentPath = window.location.pathname;
+                
+                // Só redirecionar se estiver em página de login ou raiz
                 if (currentPath === '/login' || currentPath === '/') {
-                  console.log('🎯 Redirecionando para /welcome após login');
-                  navigate('/welcome');
+                  // Verificar proteção contra loops
+                  if (!canRedirect()) {
+                    console.error('🚫 Bloqueado por proteção contra loops. Permanecendo na página atual.');
+                    toast({
+                      title: 'Atenção',
+                      description: 'Detectamos múltiplas tentativas de redirecionamento. Por favor, atualize a página.',
+                      variant: 'destructive'
+                    });
+                    return;
+                  }
+                  
+                  console.log('🔍 Verificando perfil do usuário para redirecionamento inteligente...');
+                  
+                  // Buscar perfil do usuário para verificar status
+                  const { data: profile, error: profileError } = await supabase
+                    .from('profiles')
+                    .select('subscription_status, trial_start_date, trial_end_date, first_login_completed')
+                    .eq('user_id', session.user.id)
+                    .single();
+                  
+                  if (profileError) {
+                    console.warn('⚠️ Erro ao buscar perfil, redirecionando para welcome:', profileError);
+                    registerRedirect();
+                    navigate('/welcome');
+                    return;
+                  }
+                  
+                  // Type assertion: as colunas existem no banco mas o tipo do Supabase não está atualizado
+                  const userProfile = profile as any;
+                  
+                  // Verificar se usuário já tem plano ativo
+                  const hasActivePlan = userProfile?.subscription_status === 'active' || 
+                                       userProfile?.subscription_status === 'trial' ||
+                                       userProfile?.subscription_status === 'trialing';
+                  
+                  // Verificar se trial está ativo
+                  const hasActiveTrial = userProfile?.trial_start_date && userProfile?.trial_end_date &&
+                                        new Date(userProfile.trial_end_date) > new Date();
+                  
+                  // Registrar e redirecionar
+                  registerRedirect();
+                  
+                  if (hasActivePlan || hasActiveTrial) {
+                    console.log('✅ Usuário tem plano ativo, redirecionando para /dashboard');
+                    navigate('/dashboard');
+                  } else {
+                    console.log('🎯 Usuário sem plano, redirecionando para /welcome');
+                    navigate('/welcome');
+                  }
                 }
               }
               break;
@@ -103,7 +207,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          // Não especificar redirectTo aqui para deixar o listener cuidar
+          // Redirecionar explicitamente para a origem após callback
+          redirectTo: `${window.location.origin}/`,
           queryParams: {
             access_type: 'offline',
             prompt: 'consent',
@@ -228,7 +333,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           data: {
             full_name: fullName,
           },
-          emailRedirectTo: `${window.location.origin}/welcome`,
+          emailRedirectTo: `${window.location.origin}/`,
         }
       });
       

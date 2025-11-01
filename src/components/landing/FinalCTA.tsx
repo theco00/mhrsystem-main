@@ -154,7 +154,7 @@ export default function FinalCTA({ MONTHLY_PRICE, KIVANO_PURCHASE_URL }: FinalCT
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.8 }}
           >
-            <a href={KIVANO_PURCHASE_URL} target="_blank" rel="noopener noreferrer">
+            <a href="/welcome">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -175,7 +175,7 @@ export default function FinalCTA({ MONTHLY_PRICE, KIVANO_PURCHASE_URL }: FinalCT
                 />
                 
                 <Rocket className="w-6 h-6" />
-                <span className="relative z-10">Começar Agora - R$ {MONTHLY_PRICE}/mês</span>
+                <span className="relative z-10">Começar Teste Grátis Agora</span>
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </motion.button>
             </a>

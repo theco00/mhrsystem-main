@@ -188,7 +188,7 @@ export default function CTASection({ KIVANO_PURCHASE_URL }: CTASectionProps) {
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.8 }}
                 >
-                  <a href={KIVANO_PURCHASE_URL} target="_blank" rel="noopener noreferrer">
+                  <a href="/welcome">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}

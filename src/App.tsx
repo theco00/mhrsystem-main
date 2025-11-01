@@ -84,8 +84,8 @@ function AppContent() {
       {/* Página de Boas-Vindas - Após primeiro login */}
       <Route path="/welcome" element={user ? <WelcomePage /> : <Navigate to="/login" replace />} />
       
-      {/* Rota de Login */}
-      <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
+      {/* Rota de Login - AuthContext cuida do redirecionamento após login */}
+      <Route path="/login" element={user ? <Navigate to="/" replace /> : <LoginPage />} />
       
       {/* Rota de Cadastro */}
       <Route path="/cadastro" element={user ? <Navigate to="/dashboard" replace /> : <SignUpPage />} />
