@@ -1,7 +1,7 @@
 import { User, LogOut } from "lucide-react";
 import { useEffect, useState, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContextClean";
+import { useAuth } from "@/contexts/AuthContext";
 import { UserMenu } from "@/components/auth/UserMenu";
 import titanjurosLogo from '@/assets/titanjuros-logo.png';
 import './landing.css';
