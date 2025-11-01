@@ -3,7 +3,7 @@ import { useClients } from './useClients';
 import { useLoans } from './useLoans';
 import { usePayments } from './usePayments';
 import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/contexts/AuthContextClean';
+import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 
 export type { Client } from './useClients';

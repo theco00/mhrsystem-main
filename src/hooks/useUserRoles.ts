@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/contexts/AuthContextClean';
+import { useAuth } from '@/contexts/AuthContext';
 
 // Definição dos tipos de roles existentes no sistema
 export type AppRole = 'admin' | 'user';

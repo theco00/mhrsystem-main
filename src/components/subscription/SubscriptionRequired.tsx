@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lock, CreditCard, Check, ArrowLeft } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContextClean';
+import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import titanjurosLogo from '@/assets/titanjuros-logo.svg';
 

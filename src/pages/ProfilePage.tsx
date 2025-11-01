@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { User, Mail, Calendar, Shield, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContextClean';
+import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ProfilePage() {

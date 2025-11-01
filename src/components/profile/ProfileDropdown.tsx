@@ -14,7 +14,7 @@ import {
   Phone,
   Shield
 } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContextClean';
+import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RolesContext';
 import { AdminBadge } from '@/components/admin/AdminBadge';
 

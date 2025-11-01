@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { freeTrialService, TrialStatus } from '@/services/freeTrialService';
-import { useAuth } from '@/contexts/AuthContextClean';
+import { useAuth } from '@/contexts/AuthContext';
 
 export function useFreeTrial() {
   const { user } = useAuth();
