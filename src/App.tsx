@@ -1,10 +1,10 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider, useAuth } from "./contexts/AuthContextClean";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { RolesProvider } from "./contexts/RolesContext";
 import { ThemeProvider } from "./providers/theme-provider";
-import LoginPage from "./components/auth/LoginPageSimple";
+import LoginPage from "./components/auth/LoginPage";
 import SignUpPage from "./pages/SignUpPage"; // Página de cadastro
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { SubscriptionRequired } from "./components/subscription/SubscriptionRequired";

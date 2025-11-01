@@ -6,16 +6,19 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
-import { useAuth } from '@/contexts/AuthContextClean';
+import { useAuth } from '@/contexts/AuthContext';
 import { AlertCircle, Eye, EyeOff, Loader2 } from 'lucide-react';
 import titanjurosLogo from '@/assets/titanjuros-logo.svg';
 
 export default function LoginPage() {
   const { signInWithGoogle, signInWithEmail, isLoading } = useAuth();
-  const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
 
+  // ==========================================================================
+  // LOGIN COM GOOGLE
+  // ==========================================================================
   const handleGoogleLogin = async () => {
     setErrors({});
     const result = await signInWithGoogle();
@@ -24,6 +27,9 @@ export default function LoginPage() {
     }
   };
 
+  // ==========================================================================
+  // LOGIN COM EMAIL
+  // ==========================================================================
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
@@ -44,8 +50,11 @@ export default function LoginPage() {
     }
   };
 
+  // ==========================================================================
+  // HANDLER DE MUDANÇA
+  // ==========================================================================
   const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field] || errors.general) {
       setErrors({});
     }
@@ -58,7 +67,7 @@ export default function LoginPage() {
         <ThemeToggle />
       </div>
 
-      {/* Background decorative elements - Simplificado para melhor performance */}
+      {/* Background decorative elements */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.15),transparent_60%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.2),transparent_60%)] pointer-events-none" />
 
       <div className="w-full max-w-md space-y-6 animate-fade-in relative z-10">
@@ -66,7 +75,11 @@ export default function LoginPage() {
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center mb-4 relative">
             <div className="relative bg-white rounded-2xl p-3 shadow-xl border border-primary/15 hover:shadow-primary/25 transition-all duration-300 hover:scale-105">
-              <img src={titanjurosLogo} alt="Logo TitanJuros" className="w-16 h-16 object-contain" />
+              <img
+                src={titanjurosLogo}
+                alt="Logo TitanJuros"
+                className="w-16 h-16 object-contain"
+              />
             </div>
           </div>
           <div className="space-y-2">
@@ -74,7 +87,9 @@ export default function LoginPage() {
               TitanJuros
               <span className="text-blue-600 dark:text-blue-400"> Empréstimos</span>
             </h1>
-            <p className="text-base text-gray-600 dark:text-gray-300 font-medium">Gestão Financeira Profissional</p>
+            <p className="text-base text-gray-600 dark:text-gray-300 font-medium">
+              Gestão Financeira Profissional
+            </p>
           </div>
         </div>
 
@@ -221,7 +236,8 @@ export default function LoginPage() {
               </div>
 
               <p className="text-xs text-center text-gray-500 dark:text-gray-400 mt-4">
-                Ao continuar, você concorda com nossos Termos de Serviço e Política de Privacidade
+                Ao continuar, você concorda com nossos Termos de Serviço e Política de
+                Privacidade
               </p>
             </div>
           </CardContent>
