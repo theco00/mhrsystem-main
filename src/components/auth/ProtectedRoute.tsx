@@ -11,8 +11,12 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, isLoading: authLoading } = useAuth();
   const { hasActiveSubscription, isLoading: subLoading } = useSubscription();
 
-  // Aguardar carregamento da autenticação e assinatura
-  if (authLoading || subLoading) {
+  // CORREÇÃO: Aguardar AMBOS os carregamentos completarem
+  // Isso evita redirecionamentos prematuros para /subscription-required
+  const isLoadingComplete = !authLoading && !subLoading;
+
+  // Mostrar loading enquanto verifica autenticação E assinatura
+  if (!isLoadingComplete) {
     return (
       <div className="h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
         <div className="text-center">
@@ -28,16 +32,19 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     );
   }
 
-  // Usuário não autenticado - redirecionar para login
+  // Apenas após loading completo: verificar autenticação
   if (!user) {
+    console.log('🔒 ProtectedRoute: Usuário não autenticado, redirecionando para /login');
     return <Navigate to="/login" replace />;
   }
 
-  // Usuário autenticado mas sem assinatura ativa - redirecionar para página de assinatura
+  // Apenas após loading completo: verificar assinatura
   if (!hasActiveSubscription) {
+    console.log('⚠️ ProtectedRoute: Sem assinatura ativa, redirecionando para /subscription-required');
     return <Navigate to="/subscription-required" replace />;
   }
 
   // Usuário autenticado E com assinatura ativa - permitir acesso
+  console.log('✅ ProtectedRoute: Acesso permitido');
   return <>{children}</>;
 }

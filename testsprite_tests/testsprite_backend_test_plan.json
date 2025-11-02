@@ -1,0 +1,52 @@
+[
+  {
+    "id": "TC001",
+    "title": "verify_email_password_authentication",
+    "description": "Test the /auth/signin POST endpoint to ensure users can successfully authenticate using valid email and password credentials, and receive appropriate error messages for invalid inputs."
+  },
+  {
+    "id": "TC002",
+    "title": "verify_google_oauth_login",
+    "description": "Test the /auth/google GET endpoint to verify that users can initiate and complete the Google OAuth login flow successfully, including handling of errors and redirects."
+  },
+  {
+    "id": "TC003",
+    "title": "verify_client_listing",
+    "description": "Test the /api/clients GET endpoint to ensure authenticated users can retrieve a list of their clients, with proper authorization and data isolation."
+  },
+  {
+    "id": "TC004",
+    "title": "verify_client_creation",
+    "description": "Test the /api/clients POST endpoint to validate that authenticated users can create new client records with valid data, and receive appropriate validation errors for invalid data."
+  },
+  {
+    "id": "TC005",
+    "title": "verify_client_detail_retrieval",
+    "description": "Test the /api/clients/{id} GET endpoint to ensure users can retrieve detailed information of a specific client by ID, with proper access control."
+  },
+  {
+    "id": "TC006",
+    "title": "verify_client_update",
+    "description": "Test the /api/clients/{id} PUT endpoint to verify that users can update client information correctly and that changes are persisted."
+  },
+  {
+    "id": "TC007",
+    "title": "verify_client_soft_delete",
+    "description": "Test the /api/clients/{id} DELETE endpoint to confirm that clients are soft deleted (marked as inactive) rather than permanently removed, and that they no longer appear in active client listings."
+  },
+  {
+    "id": "TC008",
+    "title": "verify_loan_listing",
+    "description": "Test the /api/loans GET endpoint to ensure users can retrieve a list of loans associated with their account, with correct data and access control."
+  },
+  {
+    "id": "TC009",
+    "title": "verify_loan_creation",
+    "description": "Test the /api/loans POST endpoint to validate that users can create new loans with correct parameters, including automatic installment calculation and interest application."
+  },
+  {
+    "id": "TC010",
+    "title": "verify_loan_detail_retrieval",
+    "description": "Test the /api/loans/{id} GET endpoint to ensure users can retrieve detailed information about a specific loan, including status and payment schedule."
+  }
+]

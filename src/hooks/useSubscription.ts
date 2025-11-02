@@ -29,12 +29,16 @@ export function useSubscription() {
 
   useEffect(() => {
     if (!user) {
-      setIsLoading(false);
+      // CORREÇÃO: Manter loading true até usuário existir
+      setIsLoading(true);
       setHasActiveSubscription(false);
       setIsTrial(false);
       setTrialDaysRemaining(0);
       return;
     }
+
+    // Garantir que começa carregando
+    setIsLoading(true);
 
     const fetchSubscription = async () => {
       try {

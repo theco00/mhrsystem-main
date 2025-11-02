@@ -1,0 +1,324 @@
+{
+  "meta": {
+    "project": "TitanJuros Loan Management System",
+    "date": "2025-10-29",
+    "prepared_by": "Software Development Manager"
+  },
+  "product_overview": "TitanJuros is a comprehensive web platform for personal loan management, integrating client management, loan and payment processing, subscription and trial control, and advanced analytics. It offers secure authentication, real-time data handling, and an interactive AI chatbot for user assistance.",
+  "core_goals": [
+    "Provide a seamless and secure user authentication experience with email/password and Google OAuth.",
+    "Implement a flexible subscription system with free trials, usage limitations during trial, and paid plans.",
+    "Enable comprehensive client, loan, and payment management with real-time updates and audit trails.",
+    "Offer informative dashboards with actionable analytics and reports.",
+    "Deliver an enhanced user experience via responsive design, interactive chatbot, and multi-channel communication integration (WhatsApp, email).",
+    "Ensure data security and privacy through row-level security and structured audit systems."
+  ],
+  "key_features": [
+    "Authentication System with email/password and Google OAuth, session and token management.",
+    "Subscription management including 7-day free trial, usage limits, and plan renewals.",
+    "Client Management with registration, search, credit scoring, and history.",
+    "Loan Management with automatic installment calculation, interest, simulations, and status control.",
+    "Payment Management with detailed schedules, payment marking, default alerts, and report exports.",
+    "Dashboard & Analytics presenting financial metrics, performance indicators, and visual graphs.",
+    "Interactive Loan Simulator for planning with amortization tables.",
+    "Notification System for alerts on due dates, defaults, and important events.",
+    "Company Settings including financial settings and personalization.",
+    "Admin Panel for user, subscription, and system configuration management.",
+    "Modern Landing Page with feature highlights, pricing, testimonials, FAQ, and AI-powered chatbot.",
+    "AI Chatbot integrated with Google Gemini for intelligent support.",
+    "Data Export capabilities to Excel and Google Sheets for external analysis.",
+    "WhatsApp integration for direct customer communication and billing.",
+    "Automated audit system with database triggers for critical operations.",
+    "Secure Row Level Security policies in the database for data isolation."
+  ],
+  "user_flow_summary": [
+    "User accesses the landing page and can navigate features and pricing or proceed to login/signup.",
+    "New or returning users authenticate via Google OAuth or email/password; upon first login, they are redirected to a welcome page to start a free trial or select a paid plan.",
+    "During the free trial, user functionalities are limited to a maximum of 5 loans and 5 clients, enforced by front-end checks and backend policies; upgrade options are presented.",
+    "Paid subscriptions are managed externally via Cakto payment links; on successful payment, webhook updates user subscription status to active with corresponding access permissions.",
+    "Authenticated users access the dashboard where loan, client, and payment management happen, supported by real-time data fetching and updates.",
+    "Users can communicate with clients via integrated WhatsApp modals and receive notifications about payments and loan statuses.",
+    "Admin users can manage system settings, subscriptions, and user roles via a dedicated admin panel.",
+    "Landing page separately deployed with modern design, navigation to system login and external purchase links."
+  ],
+  "validation_criteria": [
+    "Successful Google OAuth and email/password authentication flow without errors or loops.",
+    "Free trial activation for new users with 7-day duration and enforcement of usage caps (5 loans and 5 clients).",
+    "Proper redirection to welcome page post-login and to subscription-required page on trial or subscription expiration.",
+    "Subscription status accurately reflects payment status, with manual or webhook-based activation of paid plans.",
+    "Correct display and functionality of loan management, payment recording, notifications, and dashboards.",
+    "Responsive design on multiple devices and supported browsers without UI glitches.",
+    "Audit logs capture all critical database operations with proper triggers.",
+    "WhatsApp integration channels are operational with phone number validation and modal interactions.",
+    "Export functions generate valid Excel and Google Sheets files with correct data.",
+    "System security ensured via row-level database policies; no unauthorized data access.",
+    "Landing page loads independently with correct styles, navigation, and purchase flows.",
+    "Code base free of critical runtime bugs and typed properly with successful TypeScript compilation."
+  ],
+  "code_summary": {
+    "tech_stack": [
+      "TypeScript",
+      "React 19",
+      "Vite 5",
+      "TailwindCSS 3",
+      "Supabase (PostgreSQL)",
+      "Shadcn/ui",
+      "Radix UI",
+      "TanStack Query (React Query v5)",
+      "React Hook Form",
+      "Zod",
+      "Vitest",
+      "Framer Motion",
+      "date-fns",
+      "Recharts",
+      "Capacitor (iOS/Android)"
+    ],
+    "features": [
+      {
+        "name": "Authentication System",
+        "description": "Sistema completo de autenticação com email/senha e Google OAuth. Inclui controle de sessão, refresh token automático e gerenciamento de estado de usuário.",
+        "files": [
+          "src/contexts/AuthContext.tsx",
+          "src/components/auth/LoginPage.tsx",
+          "src/pages/SignUpPage.tsx",
+          "src/components/auth/ProtectedRoute.tsx",
+          "src/integrations/supabase/client.ts"
+        ],
+        "api_doc": {
+          "openapi": "3.0.0",
+          "info": {
+            "title": "Authentication API",
+            "version": "1.0.0"
+          },
+          "paths": {
+            "/auth/signin": {
+              "post": {
+                "summary": "Login com email e senha",
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "email": {
+                            "type": "string"
+                          },
+                          "password": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "/auth/google": {
+              "get": {
+                "summary": "Login com Google OAuth"
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "Subscription Management",
+        "description": "Sistema de assinaturas e free trial com 7 dias. Controla limites de uso, status de assinatura e renovação automática.",
+        "files": [
+          "src/hooks/useSubscription.ts",
+          "src/hooks/useFreeTrial.ts",
+          "src/services/subscriptionService.ts",
+          "src/services/freeTrialService.ts",
+          "src/components/subscription/SubscriptionGuard.tsx",
+          "supabase/migrations/20251031200000_google_login_free_trial.sql",
+          "supabase/migrations/create_user_subscriptions.sql"
+        ]
+      },
+      {
+        "name": "Client Management",
+        "description": "Gerenciamento completo de clientes com cadastro, busca, filtros, score de crédito e histórico de relacionamento.",
+        "files": [
+          "src/components/views/ClientsView.tsx",
+          "src/components/clients/ClientCard.tsx",
+          "src/components/clients/ClientDetailsDialog.tsx",
+          "src/hooks/useClients.ts"
+        ],
+        "api_doc": {
+          "openapi": "3.0.0",
+          "paths": {
+            "/api/clients": {
+              "get": {
+                "summary": "Listar clientes do usuário",
+                "security": [
+                  {
+                    "bearerAuth": []
+                  }
+                ]
+              },
+              "post": {
+                "summary": "Criar novo cliente",
+                "security": [
+                  {
+                    "bearerAuth": []
+                  }
+                ]
+              }
+            },
+            "/api/clients/{id}": {
+              "get": {
+                "summary": "Obter detalhes do cliente"
+              },
+              "put": {
+                "summary": "Atualizar cliente"
+              },
+              "delete": {
+                "summary": "Deletar cliente (soft delete)"
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "Loan Management",
+        "description": "Sistema completo de gestão de empréstimos com cálculo automático de parcelas, juros, simulador e controle de status.",
+        "files": [
+          "src/components/views/LoansView.tsx",
+          "src/components/loans/LoanDetailsDialog.tsx",
+          "src/hooks/useLoans.ts",
+          "src/hooks/useLoanData.ts"
+        ],
+        "api_doc": {
+          "openapi": "3.0.0",
+          "paths": {
+            "/api/loans": {
+              "get": {
+                "summary": "Listar empréstimos"
+              },
+              "post": {
+                "summary": "Criar novo empréstimo"
+              }
+            },
+            "/api/loans/{id}": {
+              "get": {
+                "summary": "Detalhes do empréstimo"
+              },
+              "put": {
+                "summary": "Atualizar empréstimo"
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "Payment Management",
+        "description": "Controle de pagamentos com cronograma detalhado, marcação de pagamentos, alertas de inadimplência e relatórios.",
+        "files": [
+          "src/components/views/PaymentsView.tsx",
+          "src/components/views/UpcomingPaymentsView.tsx",
+          "src/components/payments/PaymentActionDialog.tsx",
+          "src/hooks/usePayments.ts"
+        ]
+      },
+      {
+        "name": "Dashboard & Analytics",
+        "description": "Dashboard com métricas financeiras, indicadores de performance, gráficos e análises de carteira.",
+        "files": [
+          "src/components/views/DashboardView.tsx",
+          "src/components/dashboard/DashboardMetrics.tsx",
+          "src/pages/Analytics.tsx",
+          "src/hooks/useAnalyticsData.ts"
+        ]
+      },
+      {
+        "name": "Loan Calculator",
+        "description": "Simulador interativo de empréstimos com cálculo de parcelas, juros e tabela de amortização.",
+        "files": [
+          "src/components/views/CalculatorView.tsx"
+        ]
+      },
+      {
+        "name": "Notification System",
+        "description": "Sistema de notificações para alertas de vencimento, inadimplência e eventos importantes.",
+        "files": [
+          "src/components/notifications/NotificationSystem.tsx",
+          "src/components/notifications/NotificationDropdown.tsx",
+          "src/hooks/useNotifications.ts",
+          "src/hooks/useLoanNotifications.ts"
+        ]
+      },
+      {
+        "name": "Company Settings",
+        "description": "Configurações da empresa incluindo saldo atual, taxa de juros padrão e personalização.",
+        "files": [
+          "src/components/views/SettingsView.tsx",
+          "src/hooks/useCompanySettings.ts"
+        ]
+      },
+      {
+        "name": "Admin Panel",
+        "description": "Painel administrativo para gerenciamento de usuários, assinaturas e configurações do sistema.",
+        "files": [
+          "src/components/admin/AdminPanel.tsx",
+          "src/components/admin/SubscriptionManager.tsx",
+          "src/hooks/useRoles.ts",
+          "src/hooks/useUserRoles.ts"
+        ]
+      },
+      {
+        "name": "Landing Page",
+        "description": "Landing page moderna com seções de features, pricing, testimonials, FAQ e CTA. Inclui chatbot com Gemini AI.",
+        "files": [
+          "src/components/landing/LandingPage.tsx",
+          "src/components/landing/HeroSection.tsx",
+          "src/components/landing/FeaturesSection.tsx",
+          "src/components/landing/PricingSection.tsx",
+          "src/components/landing/TestimonialsSection.tsx",
+          "src/components/landing/FAQSection.tsx",
+          "src/components/landing/CTASection.tsx",
+          "src/components/landing/LandingChatbot.tsx"
+        ]
+      },
+      {
+        "name": "AI Chatbot",
+        "description": "Chatbot inteligente integrado com Google Gemini AI para suporte e assistência.",
+        "files": [
+          "src/components/ai/GeminiChatbot.tsx",
+          "src/components/ai/InteractiveChatbot.tsx",
+          "src/hooks/useGroqChat.ts"
+        ]
+      },
+      {
+        "name": "Data Export",
+        "description": "Exportação de dados para Excel e Google Sheets para relatórios e análises externas.",
+        "files": [
+          "src/utils/excelExport.ts",
+          "src/utils/googleSheetsExport.ts",
+          "src/hooks/useExportData.ts"
+        ]
+      },
+      {
+        "name": "WhatsApp Integration",
+        "description": "Integração com WhatsApp para comunicação com clientes e envio de cobranças.",
+        "files": [
+          "src/components/clients/WhatsAppModal.tsx",
+          "src/components/clients/ClientListWhatsAppModal.tsx",
+          "src/lib/whatsapp-utils.ts"
+        ]
+      },
+      {
+        "name": "Audit System",
+        "description": "Sistema de auditoria automática com triggers para rastreamento de todas as operações críticas.",
+        "files": [
+          "supabase/migrations/20251014000000_database_restructure.sql"
+        ]
+      },
+      {
+        "name": "Row Level Security (RLS)",
+        "description": "Políticas de segurança a nível de linha no Supabase para isolamento de dados entre usuários.",
+        "files": [
+          "supabase/migrations/*.sql"
+        ]
+      }
+    ]
+  }
+}

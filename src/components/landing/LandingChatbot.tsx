@@ -9,7 +9,12 @@ interface Message {
   timestamp: Date;
 }
 
-const GOOGLE_API_KEY = 'AIzaSyB6YRbA1Nq3ekH7ugtTYiI6Khh1pYDNY-Y';
+// CORREÇÃO DE SEGURANÇA: Usar variável de ambiente
+const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_GEMINI_API_KEY;
+
+if (!GOOGLE_API_KEY) {
+  console.error('⚠️ VITE_GOOGLE_GEMINI_API_KEY não configurada no .env');
+}
 
 function LandingChatbot() {
   const [isOpen, setIsOpen] = useState(false);

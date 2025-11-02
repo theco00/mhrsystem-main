@@ -50,30 +50,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(session);
       setUser(session?.user ?? null);
 
-      // Redirecionar após login bem-sucedido
+      // CORREÇÃO: Não navegamos aqui - deixar App.tsx gerenciar rotas
+      // Apenas logar o evento para debug
       if (event === 'SIGNED_IN' && session?.user) {
-        const currentPath = window.location.pathname;
-        
-        if (currentPath === '/login' || currentPath === '/cadastro' || currentPath === '/') {
-          // Verificar se usuário tem subscription ativa
-          const { data: subscriptions } = await supabase
-            .from('user_subscriptions')
-            .select('status')
-            .eq('user_id', session.user.id)
-            .single();
-
-          // Se tem subscription ativa, vai para dashboard, senão para welcome
-          if (subscriptions?.status === 'active' || subscriptions?.status === 'trial') {
-            navigate('/dashboard');
-          } else {
-            navigate('/welcome');
-          }
-        }
+        console.log('✅ Login bem-sucedido:', session.user.email);
       }
 
-      // Redirecionar após logout
       if (event === 'SIGNED_OUT') {
-        navigate('/login');
+        console.log('👋 Logout realizado');
       }
     });
 
