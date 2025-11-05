@@ -91,17 +91,16 @@ export default function WelcomePageNew() {
 
     try {
       if (planId === 'trial') {
-        // Criar trial automaticamente usando profiles
+        // Criar trial automaticamente usando user_subscriptions
         const trialEndDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 dias
         
-        // @ts-ignore - Campos serão adicionados após migração SQL
         const { error } = await supabase
-          .from('profiles')
+          .from('user_subscriptions')
           .update({
-            subscription_status: 'trial',
-            trial_end_date: trialEndDate.toISOString(),
+            status: 'trial',
+            trial_ends_at: trialEndDate.toISOString(),
           })
-          .eq('id', user.id);
+          .eq('user_id', user.id);
 
         if (error) throw error;
 

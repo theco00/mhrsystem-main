@@ -35,33 +35,78 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // MONITORAR AUTENTICAÇÃO
   // ==========================================================================
   useEffect(() => {
+    let isSubscribed = true;
+    
     // Buscar sessão inicial
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setIsLoading(false);
+      if (isSubscribed) {
+        setSession(session);
+        setUser(session?.user ?? null);
+        setIsLoading(false);
+      }
     });
 
     // Listener de mudanças de autenticação
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!isSubscribed) return;
+      
       console.log('🔐 Auth event:', event);
       setSession(session);
       setUser(session?.user ?? null);
 
-      // CORREÇÃO: Não navegamos aqui - deixar App.tsx gerenciar rotas
-      // Apenas logar o evento para debug
+      // CORREÇÃO: Implementar lógica de redirecionamento inteligente
+      // Apenas redirecionar em eventos específicos para evitar loops
       if (event === 'SIGNED_IN' && session?.user) {
         console.log('✅ Login bem-sucedido:', session.user.email);
+        
+        // Aguardar um pouco para garantir que o banco está atualizado
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Verificar se é um novo usuário ou existente
+        try {
+          const { data: subscriptionData, error } = await supabase
+            .from('user_subscriptions')
+            .select('status, trial_ends_at')
+            .eq('user_id', session.user.id)
+            .single();
+
+          if (error) {
+            console.log('👤 Novo usuário detectado - redirecionando para welcome');
+            navigate('/welcome', { replace: true });
+            return;
+          }
+
+          // Verificar se usuário já tem assinatura ativa ou trial ativo
+          const hasActiveSubscription = subscriptionData?.status && subscriptionData.status !== 'inactive';
+          const hasActiveTrial = subscriptionData?.status === 'trial' && 
+                                subscriptionData?.trial_ends_at && 
+                                new Date(subscriptionData.trial_ends_at) > new Date();
+          
+          if (hasActiveSubscription || hasActiveTrial) {
+            console.log('🏠 Usuário existente - redirecionando para dashboard');
+            navigate('/dashboard', { replace: true });
+          } else {
+            console.log('👤 Novo usuário ou sem plano - redirecionando para welcome');
+            navigate('/welcome', { replace: true });
+          }
+        } catch (error) {
+          console.log('👤 Erro ao verificar perfil, redirecionando para welcome');
+          navigate('/welcome', { replace: true });
+        }
       }
 
       if (event === 'SIGNED_OUT') {
         console.log('👋 Logout realizado');
+        navigate('/login', { replace: true });
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      isSubscribed = false;
+      subscription.unsubscribe();
+    };
   }, [navigate]);
 
   // ==========================================================================

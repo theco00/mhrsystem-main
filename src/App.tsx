@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { RolesProvider } from "./contexts/RolesContext";
 import { ThemeProvider } from "./providers/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 import LoginPage from "./components/auth/LoginPage";
 import SignUpPage from "./pages/SignUpPage"; // Página de cadastro
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
@@ -75,8 +76,8 @@ function AppContent() {
 
   return (
     <Routes>
-      {/* Rota Raiz - Inteligente: Dashboard se logado, Landing se não logado */}
-      <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <LandingPage />} />
+      {/* Rota Raiz - Landing page pública */}
+      <Route path="/" element={<LandingPage />} />
       
       {/* Página de Agradecimento - Após compra */}
       <Route path="/thank-you" element={<ThankYouPage />} />
@@ -160,6 +161,7 @@ const App = () => (
       <TooltipProvider>
         <AuthProvider>
           <AppContent />
+          <Toaster />
         </AuthProvider>
       </TooltipProvider>
     </ThemeProvider>
